@@ -60,16 +60,18 @@ server/
 ## Installation
 
 1. **Install dependencies:**
+
    ```bash
    cd server
    npm install
    ```
 
 2. **Set up environment variables:**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Then edit `.env` and fill in your configuration:
    - MongoDB connection string
    - AWS S3 credentials
@@ -82,12 +84,15 @@ server/
 ## Running the Server
 
 ### Development Mode
+
 ```bash
 npm run dev
 ```
+
 This will start the server with nodemon for auto-reloading.
 
 ### Production Mode
+
 ```bash
 npm run build
 npm start
@@ -96,14 +101,17 @@ npm start
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/register` - Register a new user
 - `POST /api/auth/login` - Login user
 
 ### Users
+
 - `GET /api/users/me` - Get current user profile (Protected)
 - `GET /api/users` - Get all users (Admin only)
 
 ### Registrations
+
 - `POST /api/registrations` - Create a new registration (Public)
 - `GET /api/registrations` - Get all registrations (Admin/Moderator)
 - `GET /api/registrations/:id` - Get single registration (Admin/Moderator)
@@ -111,11 +119,13 @@ npm start
 - `DELETE /api/registrations/:id` - Delete registration (Admin only)
 
 ### File Upload
+
 - `POST /api/upload/single` - Upload single file (Protected)
 - `POST /api/upload/multiple` - Upload multiple files (Protected)
 - `DELETE /api/upload/:key` - Delete file (Protected)
 
 ### Health Check
+
 - `GET /health` - Server health check
 
 ## Environment Variables
@@ -123,7 +133,7 @@ npm start
 ```env
 # Server
 NODE_ENV=development
-PORT=5000
+PORT=8000
 
 # MongoDB
 MONGODB_URI=mongodb://localhost:27017/tcl
@@ -166,11 +176,13 @@ RATE_LIMIT_MAX_REQUESTS=100
 ## Development
 
 ### Code Formatting
+
 ```bash
 npm run format
 ```
 
 ### Linting
+
 ```bash
 npm run lint
 ```

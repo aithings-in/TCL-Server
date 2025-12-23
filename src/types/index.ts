@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 // Extended Request interface with user
 export interface AuthRequest extends Request {
@@ -12,17 +12,38 @@ export interface AuthRequest extends Request {
 
 // Registration types
 export interface IRegistration extends Document {
+  leagueType: string;
   name: string;
   age: number;
   mobile: string;
   email: string;
   district: string;
   state: string;
-  role: string;
+  role: "Batsman" | "Bowler" | "All-rounder" | "Wicketkeeper";
   profileImage?: string;
   documents?: string[];
   registeredAt: Date;
-  status: "pending" | "approved" | "rejected";
+}
+
+// Payment types
+export interface IPayment extends Document {
+  registrationId: Types.ObjectId;
+  amount: number;
+  currency: string;
+  razorpayOrderId: string;
+  razorpayPaymentId?: string;
+  razorpaySignature?: string;
+  status: "pending" | "completed" | "failed";
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Lead types
+export interface ILead extends Document {
+  name: string;
+  email: string;
+  message: string;
+  createdAt: Date;
 }
 
 // User types

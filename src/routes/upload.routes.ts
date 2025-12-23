@@ -1,7 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
 import { uploadController } from "../controllers/upload.controller";
-import { authMiddleware } from "../middleware/auth.middleware";
 import { joiValidator } from "../middleware/joiValidator.middleware";
 import { UploadValidation } from "../validation/upload.validation";
 
@@ -15,17 +14,12 @@ const upload = multer({
   },
 });
 
-// All upload routes require authentication
-router.use(authMiddleware.authenticate);
-
 /**
  * @swagger
  * /api/upload/single:
  *   post:
  *     summary: Upload a single file
  *     tags: [Upload]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -44,8 +38,6 @@ router.use(authMiddleware.authenticate);
  *         description: File uploaded successfully
  *       400:
  *         description: No file provided
- *       401:
- *         description: Unauthorized
  */
 router.post(
   "/single",
@@ -60,8 +52,6 @@ router.post(
  *   post:
  *     summary: Upload multiple files
  *     tags: [Upload]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -100,8 +90,6 @@ router.post(
  *                       type: number
  *       400:
  *         description: No files provided
- *       401:
- *         description: Unauthorized
  */
 router.post(
   "/multiple",
@@ -116,8 +104,6 @@ router.post(
  *   delete:
  *     summary: Delete a file from S3
  *     tags: [Upload]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: key
@@ -130,8 +116,6 @@ router.post(
  *         description: File deleted successfully
  *       400:
  *         description: File key is required
- *       401:
- *         description: Unauthorized
  */
 router.delete(
   "/:key",

@@ -10,6 +10,8 @@ export class RegistrationValidation {
    * Create registration validation schema
    */
   public static createSchema = Joi.object({
+    leagueType: Joi.string()
+      .default("trial"),
     name: Joi.string().trim().required().messages({
       "any.required": Messages.VALIDATION.NAME_REQUIRED,
       "string.empty": Messages.VALIDATION.NAME_REQUIRED,

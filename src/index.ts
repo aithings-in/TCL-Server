@@ -1,9 +1,12 @@
+// Load environment variables FIRST before any other imports
+import dotenv from "dotenv";
+dotenv.config();
+
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import compression from "compression";
-import dotenv from "dotenv";
 import swaggerUi from "swagger-ui-express";
 import { databaseConfig } from "./config/database";
 import { errorHandler } from "./middleware/errorHandler";
@@ -14,13 +17,11 @@ import { Messages } from "./utils/messages";
 import { swaggerSpec } from "./config/swagger";
 
 // Import routes
-import authRoutes from "./routes/auth.routes";
-import userRoutes from "./routes/user.routes";
 import registrationRoutes from "./routes/registration.routes";
 import uploadRoutes from "./routes/upload.routes";
-
-// Load environment variables
-dotenv.config();
+import paymentRoutes from "./routes/payment.routes";
+import leadRoutes from "./routes/lead.routes";
+import emailRoutes from "./routes/email.routes";
 
 /**
  * Application Class
@@ -32,7 +33,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.port = parseInt(process.env.PORT || "5000", 10);
+    this.port = parseInt(process.env.PORT || "8000", 10);
     this.initializeMiddleware();
     this.initializeRoutes();
     this.initializeErrorHandling();
@@ -86,10 +87,11 @@ class App {
     });
 
     // API routes
-    this.app.use("/api/auth", authRoutes);
-    this.app.use("/api/users", userRoutes);
     this.app.use("/api/registrations", registrationRoutes);
     this.app.use("/api/upload", uploadRoutes);
+    this.app.use("/api/payments", paymentRoutes);
+    this.app.use("/api/leads", leadRoutes);
+    this.app.use("/api/emails", emailRoutes);
   }
 
   /**

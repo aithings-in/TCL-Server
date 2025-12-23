@@ -3,6 +3,11 @@ import { IRegistration } from "../types";
 
 const registrationSchema = new Schema<IRegistration>(
   {
+    leagueType: {
+      type: String,
+      default: "trial",
+      trim: true,
+    },
     name: {
       type: String,
       required: [true, "Name is required"],
@@ -50,11 +55,6 @@ const registrationSchema = new Schema<IRegistration>(
       type: [String],
       default: [],
     },
-    status: {
-      type: String,
-      enum: ["pending", "approved", "rejected"],
-      default: "pending",
-    },
     registeredAt: {
       type: Date,
       default: Date.now,
@@ -67,7 +67,7 @@ const registrationSchema = new Schema<IRegistration>(
 
 // Index for faster queries
 registrationSchema.index({ email: 1 });
-registrationSchema.index({ status: 1 });
+registrationSchema.index({ leagueType: 1 });
 registrationSchema.index({ registeredAt: -1 });
 
 const Registration: Model<IRegistration> = mongoose.model<IRegistration>(

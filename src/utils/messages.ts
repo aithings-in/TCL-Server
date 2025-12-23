@@ -25,6 +25,7 @@ export class Messages {
    */
   public static readonly REGISTRATION = {
     EMAIL_ALREADY_REGISTERED: "This email has already been registered",
+    PAYMENT_PENDING: "Payment is pending for this registration",
     REGISTRATION_SUCCESS: "Registration successful! We'll contact you soon.",
     REGISTRATION_FAILED: "Registration failed",
     REGISTRATIONS_RETRIEVED_SUCCESS: "Registrations retrieved successfully",
